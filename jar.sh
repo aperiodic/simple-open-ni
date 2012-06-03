@@ -5,14 +5,15 @@ rm $tmp
 mkdir $tmp
 platforms=(linux macosx windows)
 
-major=0
-minor=$1
-bugfix=0
-
-if [[ -z $minor ]]; then
-  echo 'usage: jar.sh $minor-version' 1>&2
+if [[ -z $1 ]]; then
+  echo 'usage: jar.sh $version' 1>&2
   exit 1
 fi
+
+read major minor <<<$(IFS='.'; echo $1)
+echo $major
+echo $minor
+bugfix=0
 
 soni_url="https://simple-openni.googlecode.com/files/SimpleOpenNI-$major.$minor.zip"
 echo "Downloading SimpleOpenNI-$minor.zip..."
